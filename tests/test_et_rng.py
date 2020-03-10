@@ -4,19 +4,30 @@
 
 import et_rng
 
+def test_LCG1_init():
+    """Test for et_rng.LCG1()"""
+    lcg1 = et_rng.LCG1(seed=0)
+    assert lcg1.seed == 0
+    assert lcg1.a == 2147483629
+    assert lcg1.b == 2147483629
+    m = 2**31 - 1
+    assert lcg1.m == m
 
-def test_hello_noargs():
-    """Test for et_rng.hello()."""
-    s = et_rng.hello()
-    assert s=="Hello world"
+def test_LCG1_call():
+    """Test for et_rng.LCG1.__call__()"""
+    lcg1 = et_rng.LCG1(seed=0)
+    seed = lcg1.seed
+    a = lcg1.a
+    b = lcg1.b
+    m = lcg1.m
+    x = 0
+    for i in range(10):
+        x = (a*x+b)%m
+        r = lcg1()
+        assert r == x
 
 
-def test_hello_me():
-    """Test for et_rng.hello('me')."""
-    s = et_rng.hello('me')
-    assert s=="Hello me"
-    
-    
+
 # ==============================================================================
 # The code below is for debugging a particular test in eclipse/pydev.
 # (otherwise all tests are normally run with pytest)
@@ -24,7 +35,7 @@ def test_hello_me():
 # that the source directory is on the path
 # ==============================================================================
 if __name__ == "__main__":
-    the_test_you_want_to_debug = test_hello_noargs
+    the_test_you_want_to_debug = test_LCG1_call
 
     print("__main__ running", the_test_you_want_to_debug)
     the_test_you_want_to_debug()
