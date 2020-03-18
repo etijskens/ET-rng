@@ -20,11 +20,12 @@ def test_LCG1_call():
     a = lcg1.a
     b = lcg1.b
     m = lcg1.m
-    x = 0
+    x = et_rng.UINT(0)
     for i in range(10):
         x = (a*x+b)%m
         r = lcg1()
         assert r == x
+        print(x,r)
 
 
 
