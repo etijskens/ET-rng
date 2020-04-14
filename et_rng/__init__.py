@@ -11,6 +11,19 @@ Check https://numpy.org/devdocs/user/basics.types.html for unsigned integer data
 
 __version__ = "0.0.0"
 
+try:
+    import et_rng.frng
+except ModuleNotFoundError as e:
+    # Try to build this binary extension:
+    from pathlib import Path
+    import click
+    from et_micc_build.cli_micc_build import auto_build_binary_extension
+    msg = auto_build_binary_extension(Path(__file__).parent, 'frng')
+    if not msg:
+        import et_rng.frng
+    else:
+        click.secho(msg, fg='bright_red')
+
 from time import time_ns
 import numpy as np
 """

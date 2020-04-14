@@ -8,6 +8,7 @@ Welcome to ET-rng's documentation!
 
    readme
    installation
+   apps
    api
    authors
    history
