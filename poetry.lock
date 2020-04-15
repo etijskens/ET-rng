@@ -152,6 +152,14 @@ pybind11 = ">=2.2.4,<3.0.0"
 
 [[package]]
 category = "main"
+description = "A class for timing code (start/stop, context manager, decorator)."
+name = "et-stopwatch"
+optional = false
+python-versions = ">=3.7,<4.0"
+version = "1.0.5"
+
+[[package]]
+category = "main"
 description = "Clean single-source support for Python 3 and 2"
 name = "future"
 optional = false
@@ -595,8 +603,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "bec9e2652b478dbd5580242538b7030dd28a6dec75fef8066bce2cdfdb2edb41"
-python-versions = "^3.6"
+content-hash = "a043a8aa3cdd65e4c0f10ba3202bbf11d1fd451ba06fb5ed89152f06b4260d51"
+python-versions = "^3.7"
 
 [metadata.files]
 alabaster = [
@@ -654,6 +662,10 @@ et-micc = [
 et-micc-build = [
     {file = "et-micc-build-0.10.22.tar.gz", hash = "sha256:ba4ccd6b7b4baa5c2bfb63f676b97657921ec7fe68cd8bf9afcedbc2c0379cda"},
     {file = "et_micc_build-0.10.22-py3-none-any.whl", hash = "sha256:905a016ee773196d7c509800a50c1db588e78b0a819bc106e6575877c1ffd09a"},
+]
+et-stopwatch = [
+    {file = "et-stopwatch-1.0.5.tar.gz", hash = "sha256:c10f3dbe2fce449b276ef928f70aa3ef44e184e46c0bd51e5af36c70bb0f9a8f"},
+    {file = "et_stopwatch-1.0.5-py3-none-any.whl", hash = "sha256:c0858892cad30a1bc34dc95cebcbf091532e360119c1fe02af2f1710c8e42ba8"},
 ]
 future = [
     {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},

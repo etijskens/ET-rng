@@ -15,15 +15,20 @@ def test_LCG1_init():
 
 def test_LCG1_call():
     """Test for et_rng.LCG1.__call__()"""
-    lcg1 = et_rng.LCG1(seed=0)
-    seed = lcg1.seed
+    seed = 0
+    lcg1 = et_rng.LCG1(seed=seed)
+    # values for manually computed random numbers
     a = lcg1.a
     b = lcg1.b
     m = lcg1.m
-    x = et_rng.UINT(0)
+    x = et_rng.LCG1.UINT(seed)
+    # test 10 successive random numbrs
     for i in range(10):
         x = (a*x+b)%m
         r = lcg1()
+        # verify the type of the result
+        assert type(r) == et_rng.LCG1.UINT
+        # compare the result to the manually computed x
         assert r == x
         print(x,r)
 

@@ -3,25 +3,28 @@
 """Tests for f2py module `et_rng.frng`."""
 
 import et_rng
-# create an alias for the binary extension cpp module
+# create an alias for the binary extension fortran module
 f90 = et_rng.frng.f90
-
-import numpy as np
 
 
 def test_f90_seed():
+    """Test the default seed and the corresponding initial state"""
     assert f90.seed==0
     assert f90.x==0
 
 def test_f90_set_seed():
+    """Test setting a seed and the corresponding initial state"""
     f90.set_seed(1)
     assert f90.seed==1
     assert f90.x==1
 
 def test_f90_lcg1():
-    lcg1 = et_rng.LCG1(seed=0)
-
-    f90.set_seed(0)
+    """test the fortran version against the python version, using a seed """
+    # set the seed
+    seed = 1
+    lcg1 = et_rng.LCG1(seed=seed)
+    f90.set_seed(seed)
+    # test 10 successive random numbrs
     for i in range(10):
         r = lcg1()
         fr = f90.lcg1()

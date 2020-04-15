@@ -26,45 +26,59 @@ except ModuleNotFoundError as e:
 
 from time import time_ns
 import numpy as np
-"""
-2147483629 2147483629
-306 306
-2147478121 2147478121
-99450 99450
-2145693529 2145693529
-32222106 32222106
-1567485721 1567485721
-1850028062 1850028062
-1059233218 1059233218
-261154881 261154881
-"""
-UINT = int
-UINT = np.uint64
+
 
 class LCG1:
     """`Linear congruential generator <https://en.wikipedia.org/wiki/Random_number_generation>`_
 
-    :param seed:
-    :param a:
-    :param b:
-    :param m:
-    """
-    def __init__(self, seed=None, a=2147483629, b=2147483629, m=2**31-1):
-        """
+    This class describes a function object. This is basically a function with a state. As a random
+    number generator is a deterministic function in which the new value depends on the previous
+    value, it must remember the previous value to compute the new value. The previous value is
+    part of the state of the function. Also the parameters of the LCG, a, b and m and the seed
+    are part of the state. The __init__ method initializes the state.
 
-        """
+    :param seed: the seed. The default seed uses the current time value, so that different
+        LCG1 objects with the default seed generate different sequences of random numbers.
+    :param a: a parameter for LCG
+    :param b: b parameter for LCG
+    :param m: m parameter for LCG
+
+    Typical use:
+
+    * create a LCG1 object::
+
+        from et_rng import LCG1
+        lcg = LCG1()
+
+    * create a random number::
+
+        random_number = lcg()
+        # this is equivalent to
+        random_number = lcg.__call__()
+    """
+
+    # an alias for numpy's unsigned integer type. As the LCG creates random numbers as positive
+    # integers, we better use an appropriate type for it.
+    UINT = np.uint64
+
+    def __init__(self, seed=None, a=2147483629, b=2147483629, m=2**31-1):
+        # set the seed
         if seed is None:
-            self.seed = UINT(time_ns())
+            # use a seed based on the current time value.
+            self.seed = LCG1.UINT(time_ns())
         else:
-            self.seed = UINT(seed)
-        self.a = UINT(a)
-        self.b = UINT(b)
-        self.m = UINT(m)
+            self.seed = LCG1.UINT(seed)
+
+        # store the parameters
+        self.a = LCG1.UINT(a)
+        self.b = LCG1.UINT(b)
+        self.m = LCG1.UINT(m)
+
+        # initialize the random number sequence
         self.x = self.seed
 
     def __call__(self):
         """
-
         :return: a random number
         """
         self.x = (self.a * self.x + self.b) % self.m

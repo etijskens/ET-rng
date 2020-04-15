@@ -6,11 +6,13 @@ Module et_rng.frng
 
 Module :py:mod:`frng` built from fortran code in :file:`f2py_frng/frng.f90`.
 
-.. function:: add(x,y,z)
+.. function:: set_seed(seed)
    :module: et_rng.frng
    
-   Compute the sum of *x* and *y* and store the result in *z* (overwrite).
+   Initialize the LCG random number generator with a seed. Note, that the
+   Fortran version allows for just one generator.
 
-   :param x: 1D Numpy array with ``dtype=numpy.float64`` (input)
-   :param y: 1D Numpy array with ``dtype=numpy.float64`` (input)
-   :param z: 1D Numpy array with ``dtype=numpy.float64`` (output)
+.. function:: lcg1()
+   :module: et_rng.frng
+
+   Return the next random number in the sequence

@@ -10,11 +10,18 @@
 !     extension for modern fortran.
 module f90
     implicit none
+
+    ! The Fortrtan version store the state of the function as module variables. Note that this way
+    ! we can have only one random number generator, as there is only a single state.
     integer*8, parameter :: a=2147483629_8
     integer*8, parameter :: b=2147483629_8
     integer*8, parameter :: m=2_8**31-1
     integer*8            :: seed = 0_8
     integer*8            :: x    = 0_8
+    ! REMARK: Fortran has no standard support for unsigned integers. So we use signed
+    ! integers. As a consequence the Python version and the Fortran version are not
+    ! entirely equivalent, since the range of allowed numbers in the Fortran version
+    ! is only half of that in Python (half of the range is for negative numbers).
 
     contains
         subroutine set_seed(s)
@@ -24,21 +31,13 @@ module f90
         end subroutine set_seed
 
         function lcg1()
-          ! Compute the
-          !
-          ! Python use:
-          !    import ET-rng.frng as f90
-          !    a      = np.array([1,2,3],dtype=np.float64)
-          !    result = np.ndarray((2,), np.float64)
-          !    f90.mean_and_stddev(result,a)
-          !    avg = result[0]
-          !    std = result[1]
+          ! Compute the next random number in the sequence
             implicit none
-            integer*8 :: lcg1
-          !-------------------------------------------------------------------------------------------------
-          ! declare local variables
-          !-------------------------------------------------------------------------------------------------
-            x = modulo( a * x + b, m )
+            integer*8 :: lcg1 ! result type
+
+            ! modify the state
+            x = modulo( a*x+b, m )
+            ! assign result
             lcg1 = x
 
         end function lcg1

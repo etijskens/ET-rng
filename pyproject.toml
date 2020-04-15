@@ -13,10 +13,11 @@ homepage = "https://github.com/etijskens/ET-rng"
 keywords = ['packaging', 'poetry']
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 numpy = "^1.18.1"
 et-micc-build = "^0.10.15"
 click = "^7.0.0"
+et-stopwatch = "^1.0.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.4.2"
